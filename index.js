@@ -13,8 +13,13 @@ board.on("ready", function() {
   temperature.on("change", function() {
     console.log("temperature");
     console.log("  celsius      : ", this.celsius);
-    console.log("  fahrenheit   : ", this.fahrenheit);
-    console.log("  kelvin       : ", this.kelvin);
-    console.log("--------------------------------------");
+    request.post('http://raspi-api.herokuapp.com/api/raspis/5711cedc94b909110002f855/sensors/5711cefb94b909110002f85f/sensors_data', { json: { value:this.celsius, sentAt: Date.now() } }, function(err){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log("Post to server OK");
+      }
+    });
   });
 });
