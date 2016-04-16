@@ -4,6 +4,8 @@ var board = new five.Board({
   io: new raspi()
 });
 
+var request = require('request');
+
 board.on("ready", function() {
   var temperature = new five.Thermometer({
     controller: "BMP180",
